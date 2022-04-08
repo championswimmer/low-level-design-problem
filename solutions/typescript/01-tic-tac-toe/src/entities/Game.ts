@@ -39,14 +39,16 @@ export class Game {
 
     nextTurnPrompt(): string {
         const player = this.turn % 2 == 0 ? this.p1 : this.p2;
-        return `Turn: ${this.turn + 1}  |  Player : ${player.name} (${player.character}) `
+
+        return '\n' + this.board.getBoardForDisplay()
+            + '\n'
+            + `Turn: ${this.turn + 1}  |  Player : ${player.name} (${player.character})`
     }
 
     play(box: string) {
         const player = this.turn % 2 == 0 ? this.p1 : this.p2;
 
         const success = this.board.markBoard(box, player.character)
-        this.board.printBoard()
 
         if (success) {
             if (this.checkWinner(player)) {

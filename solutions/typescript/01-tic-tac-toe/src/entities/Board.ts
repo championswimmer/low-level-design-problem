@@ -2,19 +2,28 @@ class InvalidBoxNameError extends Error {
     message = 'Invalid box identifier';
 }
 
-export class Board {
-    grid: Array<Array<string>> = [
-        ["_", "_", "_"],
-        ["_", "_", "_"],
-        ["_", "_", "_"]
-    ]
+const BOARD_DEFAULT_SIZE = 3
+const ROWS = "ABCDEFGHIJ"
 
-    printBoard() {
-        console.log(`
-        ${this.grid[0][0]}  ${this.grid[0][1]}  ${this.grid[0][2]}
-        ${this.grid[1][0]}  ${this.grid[1][1]}  ${this.grid[1][2]}
-        ${this.grid[2][0]}  ${this.grid[2][1]}  ${this.grid[2][2]}
-        `)
+export class Board {
+    size!: number
+    grid!: Array<Array<string>>
+
+
+    constructor(size: number = BOARD_DEFAULT_SIZE) {
+        this.size = size
+        this.grid = []
+        for (let i = 0; i < size; i++) {
+            this.grid.push(new Array(size).fill("_"))
+        }
+    }
+
+    getBoardForDisplay(): string {
+        const displayRows = []
+        for (let row of this.grid) {
+            displayRows.push(row.join('\t'))
+        }
+        return displayRows.join('\n')
     }
 
     markBoard(box: string, character: string): boolean {
@@ -22,10 +31,10 @@ export class Board {
         if (box.length != 2) {
             throw new InvalidBoxNameError()
         }
-        const row = ["A", "B", "C"].indexOf(box.charAt(0))
+        const row = ROWS.indexOf(box.charAt(0))
         const col = Number(box.charAt(1)) - 1
 
-        if (row < 0 || row > 2 || col < 0 || col > 2) {
+        if (row < 0 || row >= this.size || col < 0 || col >= this.size) {
             throw new InvalidBoxNameError()
         }
 
@@ -38,25 +47,39 @@ export class Board {
     }
 
     getRowAsString(rowName: string): string {
-        if (["A", "B", "C"].indexOf(rowName) == -1) {
-            throw new Error("row has to be A, B or C")
+        const row = ROWS.indexOf(rowName)
+        if (row == -1 || row >= this.size) {
+            throw new Error(`row number is invalid`)
         }
-        const row = ["A", "B", "C"].indexOf(rowName)
         return this.grid[row].join("")
     }
 
     getColAsString(col: number): string {
-        if (col < 0 || col > 2) {
+        if (col < 0 || col > this.size) {
             throw new Error("col has to be between 0 and 2")
         }
-        return [this.grid[0][col], this.grid[1][col], this.grid[2][col]].join("")
+        const colVals = []
+        for (let i = 0; i < this.size; i++) {
+            colVals.push(this.grid[i][col])
+        }
+
+        return colVals.join("")
     }
 
     getDiagAsString(diagNo: number): string {
+        const diagVals = []
         if (diagNo == 0) {
-            return [this.grid[0][0], this.grid[1][1], this.grid[2][2]].join("")
+            for (let i = 0; i < this.size; i++) {
+                diagVals.push(this.grid[i][i])
+            }
+
+            return diagVals.join("")
         } else if (diagNo == 1) {
-            return [this.grid[0][2], this.grid[1][1], this.grid[2][0]].join("")
+
+            for (let i = 0; i < this.size; i++) {
+                diagVals.push(this.grid[i][this.size - 1 - i])
+            }
+            return diagVals.join("")
         } else {
             throw new Error("Invalid diagonal")
         }

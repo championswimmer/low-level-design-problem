@@ -78,7 +78,7 @@ test('board getter for col/row/diag throws error properly', function (assert) {
     const b = new Board()
     expect(() => {
         b.getRowAsString('D')
-    }).toThrow('row has to be A, B or C')
+    }).toThrow('row number is invalid')
 
     expect(() => {
         b.getColAsString(5)
