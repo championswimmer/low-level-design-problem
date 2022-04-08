@@ -1,3 +1,7 @@
+class InvalidBoxNameError extends Error {
+    message = 'Invalid box identifier';
+}
+
 export class Board {
     grid: Array<Array<string>> = [
         ["_", "_", "_"],
@@ -13,13 +17,17 @@ export class Board {
         `)
     }
 
-    markBoard(box: string, character: string) : boolean {
+    markBoard(box: string, character: string): boolean {
         // box: A1 or B2 like that
         if (box.length != 2) {
-            throw Error('Invalid box identifier')
+            throw new InvalidBoxNameError()
         }
         const row = ["A", "B", "C"].indexOf(box.charAt(0))
         const col = Number(box.charAt(1)) - 1
+
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            throw new InvalidBoxNameError()
+        }
 
         if (this.grid[row][col] != "_") {
             return false
