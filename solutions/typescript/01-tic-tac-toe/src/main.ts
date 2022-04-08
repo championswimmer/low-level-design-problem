@@ -1,13 +1,23 @@
-import { Player } from "./entities/Player";
 import { Game } from "./entities/Game";
+import * as rl from 'readline-sync'
 
 
-const pb = new Player.Builder()
-const p = pb.setName("Arnav").setCharacter("✅").build()
+const gameBuilder = new Game.Builder()
 
-console.log(p.name, p.character)
+const player1Name = rl.question("Enter Player 1 name: ")
+const player1Char = rl.question("Enter Player 1 character (X): ", { defaultInput: "X" })
 
+gameBuilder.addPlayer1(player1Name, player1Char)
 
-const gb = new Game.Builder()
+const player2Name = rl.question("Enter Player 2 name: ")
+const player2Char = rl.question("Enter Player 2 character (O): : ", { defaultInput: "O" })
 
-gb.createPlayer1("Naman").createPlayer2("Arnav").build()
+gameBuilder.addPlayer2(player2Name, player2Char)
+
+const game = gameBuilder.build()
+
+while (game.state == "STARTED") {
+    console.log(game.nextTurnPrompt())
+    const box = rl.question("Enter Box: ")
+    game.play(box)
+}

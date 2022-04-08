@@ -12,6 +12,9 @@ export class Player {
         }
 
         setCharacter(value: string): PlayerBuilder {
+            if (value == "_") {
+                throw new Error("Underscore '_' is not a valid player character")
+            }
             this.character = value;
             return this;
         }
