@@ -1,10 +1,13 @@
-import { Board } from "./entities/Board";
+import { Player } from "./entities/Player";
+import { Game } from "./entities/Game";
 
 
-const b = new Board();
+const pb = new Player.Builder()
+const p = pb.setName("Arnav").setCharacter("✅").build()
 
-b.printBoard();
-b.mark(0, 1, 'X');
-b.printBoard();
-console.log(b.getRow(0));
-console.log(b.getColumn(1));
+console.log(p.name, p.character)
+
+
+const gb = new Game.Builder()
+
+gb.createPlayer1("Naman").createPlayer2("Arnav").build()
