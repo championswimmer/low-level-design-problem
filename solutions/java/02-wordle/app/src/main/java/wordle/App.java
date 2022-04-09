@@ -7,21 +7,18 @@ import wordle.data.WordFactory;
 import wordle.game.Game;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
 
-        String word = WordFactory.createRandomWord();
-        System.out.println(word);
-
-        Game wordle = new Game.Builder()
+        Game.Builder wordleBuilder = new Game.Builder()
                 .setDifficulty(Game.Difficulty.EASY)
-                .setWordSize(5)
-                .build();
+                .setWordSize(5);
 
+        Game wordle = wordleBuilder.build();
 
+        while (wordle.getState() == Game.State.PLAYING) {
+            wordle.printBoard();
+            String attempt = System.console().readLine();
+            wordle.attempt(attempt);
+        }
     }
 }
