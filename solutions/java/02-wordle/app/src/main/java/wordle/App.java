@@ -3,6 +3,9 @@
  */
 package wordle;
 
+import wordle.data.WordFactory;
+import wordle.game.Game;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -13,5 +16,12 @@ public class App {
 
         String word = WordFactory.createRandomWord();
         System.out.println(word);
+
+        Game wordle = new Game.Builder()
+                .setDifficulty(Game.Difficulty.EASY)
+                .setWordSize(5)
+                .build();
+
+
     }
 }

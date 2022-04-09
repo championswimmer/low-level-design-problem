@@ -1,4 +1,4 @@
-package wordle;
+package wordle.data;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class WordFactory {
 
-    static String createRandomWord( /* FUTURE: wordSize */ ) {
+    public static String createRandomWord( /* FUTURE: wordSize */ ) {
         InputStream is = WordFactory.class.getClassLoader().getResourceAsStream("words.txt");
         ArrayList<String> words = new ArrayList<String>();
         new BufferedReader(new InputStreamReader(is)).lines().forEach( v -> {
