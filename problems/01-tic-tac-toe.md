@@ -48,7 +48,7 @@ Game has 2 players. Every player has a name and a character. The character is by
 ```
 Enter Player 1 Name: 
 > John 
-Enter Player 2 Character (X):
+Enter Player 1 Character (X):
 > ❎
 Enter Player 2 Name:
 > Jane 
