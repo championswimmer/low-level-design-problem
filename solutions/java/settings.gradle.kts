@@ -8,5 +8,5 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-rootProject.name = "02-wordle"
-include("app")
+rootProject.name = "low-level-design-problems"
+include("02-wordle")
