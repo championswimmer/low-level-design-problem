@@ -10,3 +10,4 @@
 
 rootProject.name = "low-level-design-problems"
 include("02-wordle")
+include("03-snakeladder")
