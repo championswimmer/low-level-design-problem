@@ -36,3 +36,10 @@ Design a CLI-based Snake & Ladders game
 - Keep the code extensible to accomodate multi-dice mode 
 - Keep the code extensible to allow N players instead of 2 players 
 - Allow configuring number of snakes and ladders separately from N
+
+
+## (SOLUTION) UML Diagram 
+
+![SNL-UML](https://user-images.githubusercontent.com/1327050/166486223-3b3d275c-6b1d-4dec-be8e-d6c34a59d264.png)
+
+
