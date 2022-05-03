@@ -8,6 +8,7 @@ public class PipeFactory {
         SNAKE,
         LADDER
     }
+
     private final int boardSize;
     private Random random;
 
@@ -20,13 +21,19 @@ public class PipeFactory {
         int start;
         int end;
         if (pipeType == PipeType.SNAKE) {
-            start  = random.nextInt(boardSize + 1, boardSize * boardSize);
-            end = random.nextInt(1, start - (start % boardSize));
+            int startRow = 1 + random.nextInt(boardSize - 1);
+            int endRow = random.nextInt(startRow);
+
+            start = boardSize * startRow + random.nextInt(boardSize);
+            end = boardSize * endRow + random.nextInt(boardSize) + 1;
             return new Snake(start, end);
 
         } else { // pipeType == PipeType.LADDER
-            start  = random.nextInt(1, boardSize * (boardSize - 1));
-            end = random.nextInt(start + (-start % boardSize) + 1, boardSize * boardSize);
+            int endRow = 1 + random.nextInt(boardSize - 1);
+            int startRow = random.nextInt(endRow);
+
+            start = boardSize * startRow + random.nextInt(boardSize) + 1;
+            end = boardSize * endRow + random.nextInt(boardSize);
             return new Ladder(start, end);
         }
     }

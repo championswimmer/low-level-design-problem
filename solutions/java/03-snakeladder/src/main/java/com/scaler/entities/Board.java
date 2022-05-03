@@ -12,6 +12,19 @@ public class Board {
         this.pipes = pipes;
     }
 
+    Map<Integer, Pipe> getPipes() {
+        return pipes;
+    }
+
+    public void printBoardDetails() {
+        System.out.println("Board Size: " + size);
+        System.out.println("Pipes: ");
+        for (Pipe pipe : pipes.values()) {
+            System.out.println(pipe.getClass().getName());
+            System.out.println(" Pipe start " + pipe.getStart() + " end " + pipe.getEnd());
+        }
+    }
+
 
     public static class Builder {
         private int size;
@@ -31,6 +44,9 @@ public class Board {
             while (pipes.size() < size * 2) {
                 addPipe(PipeFactory.PipeType.LADDER);
             }
+            /*
+            TODO: consecutive 5 snakes should not be allowed
+             */
         }
 
 

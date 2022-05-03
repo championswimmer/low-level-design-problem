@@ -28,5 +28,6 @@ public class Game {
                     new Player.Builder().setName(name).build()
             );
         }
+        board.printBoardDetails();
     }
 }
