@@ -42,6 +42,10 @@ public class Board {
             }
         }
 
+        public Board build() {
+            return new Board(size, pipes);
+        }
+
 
     }
 
