@@ -20,12 +20,16 @@ public class Player {
     public static class Builder {
         private String name;
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             this.name = name;
+            return this;
         }
 
         Player build() {
             return new Player(name, 0);
         }
+    }
+    static Builder builder() {
+        return new Builder();
     }
 }
